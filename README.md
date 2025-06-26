@@ -18,6 +18,8 @@ Este proyecto proporciona un entorno completo para el desarrollo y despliegue de
 
 ```bash
 git clone https://github.com/joanC0492/wordpress-docker-template-jcc.git
+```
+```bash
 cd wordpress-docker-template-jcc
 ```
 
