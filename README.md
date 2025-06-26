@@ -17,8 +17,8 @@ Este proyecto proporciona un entorno completo para el desarrollo y despliegue de
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/wordpress-docker-template.git
-cd wordpress-docker-template
+git clone https://github.com/joanC0492/wordpress-docker-template-jcc.git
+cd wordpress-docker-template-jcc
 ```
 
 ### 2. Crear archivo de entorno
