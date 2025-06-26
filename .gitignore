@@ -1,0 +1,36 @@
+# 🚫 No versionar el core de WordPress
+wordpress/
+
+# 📁 Archivos subidos por usuarios (no deben ir en Git)
+wp-content/uploads/
+
+# ⚙️ Archivos de sistema / temporales
+*.log
+*.sql
+*.tar.gz
+*.zip
+.DS_Store
+
+# ⚠️ Archivos sensibles / específicos del entorno
+.env
+wp-config.php
+.htaccess
+
+# ❗ Evitar subir backups u otras configuraciones locales
+backup-local.sql
+
+# Ignorar todo lo que hay en plugins
+wp-content/plugins/*
+# Excepto mi plugin "mi-plugin"
+!wp-content/plugins/mi-plugin/
+!wp-content/plugins/mi-plugin/**  # Para que tome su contenido
+
+!wp-content/plugins/miblog-config/
+!wp-content/plugins/miblog-config/**
+
+
+# Ignorar todos los temas
+wp-content/themes/*
+# Excepto mi tema "mi-tema"
+!wp-content/themes/hello-jcc-child/
+!wp-content/themes/hello-jcc-child/**

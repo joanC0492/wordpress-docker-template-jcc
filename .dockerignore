@@ -1,0 +1,5 @@
+wordpress/wp-config.php
+*.log
+*.sql
+.env
+.git

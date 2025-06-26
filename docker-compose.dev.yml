@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  # MYSQL Database ----------------------------------------------------
+  database:
+    image: mysql:8.0.35
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    networks:
+      - wp_dreduardoflores
+  # WORDPRESS ----------------------------------------------------
+  wordpress:
+    depends_on:
+      - database
+    image: custom-wordpress:latest
+    # image: wordpress:6.8.1-php8.2
+    ports:
+      - "8085:80"
+    restart: always
+    volumes:
+      # Archivos de configuración
+      - ./wp-config.php:/var/www/html/wp-config.php
+      - ./.htaccess:/var/www/html/.htaccess
+      # Archivos de configuración de PHP
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./wp-content/themes:/var/www/html/wp-content/themes
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      #
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+      WORDPRESS_DB_USER: "${MYSQL_USER}"
+      WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
+      WORDPRESS_TABLE_PREFIX: "${WORDPRESS_TABLE_PREFIX}"
+    networks:
+      - wp_dreduardoflores
+  # PHPMYADMIN
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin:5.2.2
+    restart: always
+    ports:
+      - "8086:80"
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - wp_dreduardoflores
+networks:
+  wp_dreduardoflores:
+volumes:
+  db_data:
